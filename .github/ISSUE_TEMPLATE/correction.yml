@@ -1,0 +1,44 @@
+name: Suggest a correction
+description: Something wrong in a text, tune, link or source credit
+title: "Correction: "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Sources and readers are invited to send corrections and objections to this provisional release (0.9).
+        Please do not paste hymn texts; first lines, IDs and page references are enough.
+  - type: input
+    id: record
+    attributes:
+      label: Record
+      description: The ID of the text, tune or hymnal (e.g. DE-00295, EN-00001, Zahn 4457, TLH)
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page on the site
+      description: The address of the page, if you came from the site
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong
+    validations:
+      required: true
+  - type: textarea
+    id: should
+    attributes:
+      label: What it should be
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: Book and page, or a link, that shows the correct value
+  - type: dropdown
+    id: who
+    attributes:
+      label: Are you writing for one of the sources listed in SOURCES.md?
+      options:
+        - "No"
+        - "Yes"

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Please cite the release number. A DOI will be given with release 1.0."
+title: "Tunes and Texts: Lutheran Hymns in German, Scandinavian and English"
+version: "0.9 (provisional, under review)"
+date-released: 2026-11-20
+type: dataset
+authors:
+  - family-names: Hutchins
+    given-names: John
+license: CC0-1.0
+url: "https://tunesandtexts.github.io/"
+repository-code: "https://github.com/tunesandtexts/tunesandtexts.github.io"

@@ -1,0 +1,338 @@
+[
+ {
+  "file": "data/core/en_texts.csv",
+  "sheet": "EN Texts",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 7389,
+  "columns": 51
+ },
+ {
+  "file": "data/core/en_tune_links.csv",
+  "sheet": "EN-Tune links",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 3914,
+  "columns": 15
+ },
+ {
+  "file": "data/core/scandinavian_texts.csv",
+  "sheet": "Scandinavian texts",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 1106,
+  "columns": 38
+ },
+ {
+  "file": "data/core/scandinavian_tune_links.csv",
+  "sheet": "Scandinavian–Tune links",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 1003,
+  "columns": 12
+ },
+ {
+  "file": "data/core/scandinavian_english_links.csv",
+  "sheet": "Scandinavian–English links",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 38,
+  "columns": 12
+ },
+ {
+  "file": "data/core/de_texts_added.csv",
+  "sheet": "New DE texts",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 2076,
+  "columns": 27
+ },
+ {
+  "file": "data/core/becker_psalter_schuetz.csv",
+  "sheet": "Becker Psalter (Schütz)",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 159,
+  "columns": 15
+ },
+ {
+  "file": "data/core/translators.csv",
+  "sheet": "Translators",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 29,
+  "columns": 4
+ },
+ {
+  "file": "data/core/hymnal_appearances.csv",
+  "sheet": "Hymnal appearances",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 7906,
+  "columns": 18
+ },
+ {
+  "file": "data/core/scandinavian_appearances.csv",
+  "sheet": "Scandinavian appearances",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 1760,
+  "columns": 7
+ },
+ {
+  "file": "data/core/other_language_texts.csv",
+  "sheet": "Other-language texts",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 475,
+  "columns": 26
+ },
+ {
+  "file": "data/core/other_language_tune_links.csv",
+  "sheet": "Other-language–Tune links",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 361,
+  "columns": 10
+ },
+ {
+  "file": "data/core/other_language_appearances.csv",
+  "sheet": "Other-language appearances",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 494,
+  "columns": 6
+ },
+ {
+  "file": "data/core/tune_names_to_zahn.csv",
+  "sheet": "Tune names → Zahn",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 1783,
+  "columns": 14
+ },
+ {
+  "file": "data/core/tune_evidence.csv",
+  "sheet": "Tune evidence",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 531,
+  "columns": 18
+ },
+ {
+  "file": "data/sources/breitendich_1764_melodies.csv",
+  "sheet": "Breitendich 1764 melodies",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 194,
+  "columns": 25
+ },
+ {
+  "file": "data/sources/breitendich_cross_references.csv",
+  "sheet": "Breitendich cross-references",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 280,
+  "columns": 7
+ },
+ {
+  "file": "data/sources/foltmar_1785_melodies.csv",
+  "sheet": "Foltmar 1785 melodies",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 93,
+  "columns": 18
+ },
+ {
+  "file": "data/sources/foltmar_1785_register.csv",
+  "sheet": "Foltmar 1785 register",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 301,
+  "columns": 19
+ },
+ {
+  "file": "data/sources/lindeman_1873_older_melodies.csv",
+  "sheet": "Lindeman 1873 older melodies",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 77,
+  "columns": 23
+ },
+ {
+  "file": "data/sources/belsheim_1876.csv",
+  "sheet": "Belsheim 1876",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 156,
+  "columns": 28
+ },
+ {
+  "file": "data/sources/belsheim_1876_tunes.csv",
+  "sheet": "Belsheim 1876 – tunes",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 94,
+  "columns": 23
+ },
+ {
+  "file": "data/sources/berggreen_origins.csv",
+  "sheet": "Berggreen origins",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 143,
+  "columns": 10
+ },
+ {
+  "file": "data/sources/kingo_hymnal_melody_lines.csv",
+  "sheet": "Kingo hymnal melody lines",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 59,
+  "columns": 23
+ },
+ {
+  "file": "data/sources/guldberg_1779_melody_lines.csv",
+  "sheet": "Guldberg 1779 melody lines",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 159,
+  "columns": 23
+ },
+ {
+  "file": "data/sources/pontoppidan_1740_check.csv",
+  "sheet": "Pontoppidan 1740 check",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 549,
+  "columns": 44
+ },
+ {
+  "file": "data/sources/pontoppidan_1740_breitendich.csv",
+  "sheet": "Pontoppidan – Breitendich",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 189,
+  "columns": 13
+ },
+ {
+  "file": "data/sources/neuendorf_translations.csv",
+  "sheet": "Neuendorf translations",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 70,
+  "columns": 19
+ },
+ {
+  "file": "data/sources/hm_2004_register.csv",
+  "sheet": "HM 2004 register",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 432,
+  "columns": 13
+ },
+ {
+  "file": "data/sources/chorale_book_1863.csv",
+  "sheet": "Chorale Book 1863",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 190,
+  "columns": 15
+ },
+ {
+  "file": "data/sources/elh_handbook.csv",
+  "sheet": "ELH Handbook",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 646,
+  "columns": 15
+ },
+ {
+  "file": "data/sources/elh_handbook_tunes.csv",
+  "sheet": "ELH Handbook tunes",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 413,
+  "columns": 3
+ },
+ {
+  "file": "data/sources/elhb_1911_tunes.csv",
+  "sheet": "ELHB 1911 tunes",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 601,
+  "columns": 7
+ },
+ {
+  "file": "data/sources/julian_article_rows.csv",
+  "sheet": "Julian article rows",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 2936,
+  "columns": 18
+ },
+ {
+  "file": "data/sources/hymnoglypt_left_out.csv",
+  "sheet": "Hymnoglypt left out",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 72,
+  "columns": 4
+ },
+ {
+  "file": "data/sources/norsk_salmebok_1985.csv",
+  "sheet": "Norsk salmebok 1985",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 106,
+  "columns": 11
+ },
+ {
+  "file": "data/sources/n13_versemaal_haavik.csv",
+  "sheet": "N13 versemål (Haavik)",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 120,
+  "columns": 5
+ },
+ {
+  "file": "data/sources/n13_german_authors_km_2012.csv",
+  "sheet": "N13 German authors (KM 2012)",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 83,
+  "columns": 14
+ },
+ {
+  "file": "data/sources/troens_rare_klenodie_1894.csv",
+  "sheet": "Troens rare Klenodie 1894",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 355,
+  "columns": 13
+ },
+ {
+  "file": "data/work/julian_ocr_check_2026_11_11.csv",
+  "sheet": "Julian OCR check 2026-11-11",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 1688,
+  "columns": 18
+ },
+ {
+  "file": "data/work/meter_check_2026_11_12.csv",
+  "sheet": "Meter check 2026-11-12",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 332,
+  "columns": 12
+ },
+ {
+  "file": "data/work/data_issues.csv",
+  "sheet": "Data issues",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 17,
+  "columns": 3
+ },
+ {
+  "file": "data/work/scandinavian_id_changes.csv",
+  "sheet": "Scandinavian ID changes",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 111,
+  "columns": 3
+ },
+ {
+  "file": "data/work/en_id_changes.csv",
+  "sheet": "EN ID changes",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 26,
+  "columns": 3
+ },
+ {
+  "file": "data/work/de_id_changes.csv",
+  "sheet": "DE ID changes",
+  "source_file": "Tunes_and_Texts_DATA_2026-11-20_v90.xlsx",
+  "rows": 1,
+  "columns": 3
+ },
+ {
+  "file": "data/core/zahn_tunes.csv",
+  "sheet": "Sheet1",
+  "source_file": "master.xlsx",
+  "rows": 9538,
+  "columns": 47
+ },
+ {
+  "file": "data/core/zahn_texts.csv",
+  "sheet": "Texts",
+  "source_file": "texts.xlsx",
+  "rows": 5897,
+  "columns": 29
+ },
+ {
+  "file": "data/core/zahn_text_tune_links.csv",
+  "sheet": "Text-Tune",
+  "source_file": "texts.xlsx",
+  "rows": 11789,
+  "columns": 17
+ }
+]

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Write by email instead
+    url: mailto:intuitufidei@gmail.com
+    about: For corrections from people without a GitHub account.

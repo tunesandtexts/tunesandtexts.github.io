@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tunes and Texts</title>
+<meta name="description" content="Tunes and Texts: Lutheran Hymns in German, Scandinavian and English. A linked index of Zahn's chorale melodies, German hymn texts and their Danish, Norwegian, Swedish, English, Finnish, Czech and Slovak translations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23a3212b%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22serif%22%3E%E2%84%A3%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="top-row">
+    <a class="brand" href="#home">
+      <span class="brand-title">Tunes and Texts</span>
+      <span class="brand-sub">Lutheran Hymns in German, Scandinavian and English</span>
+    </a>
+    <label class="scholar-switch" for="scholar">
+      <input type="checkbox" id="scholar">
+      <span class="track" aria-hidden="true"><span class="knob"></span></span>
+      <span class="lbl">Scholar view</span>
+    </label>
+  </div>
+  <nav class="nav" aria-label="Main">
+    <a href="#home" data-nav="home">Search</a>
+    <a href="#tunes-az" data-nav="tunes">Tunes</a>
+    <a href="#people" data-nav="people">Authors</a>
+    <a href="#hymnals" data-nav="hymnals">Hymnals</a>
+    <a href="#melody" data-nav="melody">Melody search</a>
+    <a href="#compare" data-nav="compare">Compare hymnals</a>
+    <a href="#about" data-nav="about">About</a>
+  </nav>
+  <div class="banner" role="note"><strong>Release 0.9, provisional and under review.</strong> Links marked <span class="badge p">probable</span> or <span class="badge c">check</span> may still change.</div>
+</header>
+<main id="main" tabindex="-1">
+  <div class="loading" id="loading"><p>Loading the index…</p><p class="muted" id="loading-detail">about 3 MB</p></div>
+</main>
+<footer class="foot">
+  <div class="foot-inner">
+    <div id="correct-slot"></div>
+    <p>Compiled by John Hutchins. The project's own work (IDs, links, decisions, corrections) is <a href="#about">CC0</a>; first lines, credits and register entries remain subject to their <a href="#sources">sources' terms</a>. Data from Hymnary.org used with credit. Scans are linked, not copied.</p>
+    <p class="muted" id="foot-meta"></p>
+  </div>
+</footer>
+<div class="dialog-backdrop" id="dlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
+    <h2 id="dlg-title">Suggest a correction</h2>
+    <div id="dlg-body"></div>
+    <div class="dialog-actions"><button type="button" class="btn" id="dlg-close">Close</button></div>
+  </div>
+</div>
+<script src="assets/abcjs-basic-min.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 
   var REPO = 'tunesandtexts/tunesandtexts.github.io';
   var SITE = 'https://tunesandtexts.github.io/';
-  var EMAIL = 'intuitufidei@gmail.com';
+  var EMAIL = 'jhutchns@gmail.com';
   var DATA = 'site-data/';
 
   var LANGS = { de: 'German', da: 'Danish', no: 'Norwegian', nn: 'Nynorsk', sv: 'Swedish', en: 'English',
@@ -13,13 +13,13 @@
   var LORDER = ['de', 'da', 'no', 'nn', 'sv', 'en', 'fi', 'cs', 'sk', 'pl', 'es'];
   var BADGE = { p: 'probable', c: 'check', x: 'rejected' };
   var REL = {
-    own: 'Own melody (Zahn register)', supp: 'Own melody (Zahn supplement)', also: 'Also sung to (Zahn register)',
+    own: 'Melody in Zahn\'s register', supp: 'Melody in Zahn\'s supplement', also: 'Also sung to (Zahn register)',
     struct: 'Melody of the original (from Zahn\'s register)', structalso: 'Also sung to, via the original (Zahn)',
     sung: 'Sung to (named in a hymnal or source)', printed: 'Printed with this tune in a hymnal',
     variant: 'Variant chosen by its opening notes'
   };
   var RELGROUP = { own: 0, supp: 0, struct: 0, also: 1, structalso: 1, sung: 2, printed: 2, variant: 2 };
-  var GROUPNAME = ['Own melody', 'Also sung to', 'Sung to in hymnals and sources'];
+  var GROUPNAME = ['The original\'s melodies', 'Also sung to', 'Sung to in hymnals and sources'];
 
   var S = {
     texts: {}, tlist: [], tunes: {}, tlistTunes: [], links: [], ev: [], byText: {}, byTune: {}, kids: {},
@@ -33,6 +33,9 @@
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
+  }
+  function stripDates(s) {
+    return String(s || '').replace(/\s*\(?\b(?:d\.|b\.|fl\.|c\.|ca\.)?\s*1[2-9]\d\d(?:\s*[-–]\s*\d{2,4})?\)?\.?/g, '').replace(/,\s*(?=,|;|$)/g, '').replace(/\s{2,}/g, ' ').trim();
   }
   function fmt(n) { return Number(n).toLocaleString('en-US'); }
   function norm(s) {
@@ -123,7 +126,7 @@
       S.hymnals.forEach(function (h) { S.hymBySlug[h.slug] = h; S.hymByCode[h.code] = h; });
       S.people.forEach(function (p) {
         S.pBySlug[p.slug] = p;
-        p.n = norm(p.name);
+        p.n = norm(p.name + ' ' + (p.variants || []).join(' '));
         p.t.forEach(function (id) { (S.pByText[id] = S.pByText[id] || []).push(p); });
       });
       var m = S.meta;
@@ -162,6 +165,33 @@
     while (T(cur) && T(cur)[5] && !seen[cur]) { seen[cur] = 1; cur = T(cur)[5]; }
     return cur;
   }
+  // Tunes of a text split into the original's melodies and other melodies.
+  // orig: own / supplement / melody of the original, for this text and for its root original. other: every other linked tune.
+  function tuneSplit(id) {
+    var live = function (x) { return (S.byText[x] || []).filter(function (l) { return l[3] !== 'x'; }); };
+    var orig = {}, other = {}, root = rootOf(id);
+    var fam = live(id).concat(root !== id ? live(root) : []), alsoOnly = false;
+    fam.forEach(function (l) { if (RELGROUP[l[2]] === 0) orig[l[1]] = 1; });
+    // An original with no melody of its own in Zahn, only "also sung to" tunes, was sung to existing tunes: those count as borrowed.
+    if (!Object.keys(orig).length) fam.forEach(function (l) { if (l[2] === 'also' || l[2] === 'structalso') { orig[l[1]] = 1; alsoOnly = true; } });
+    live(id).forEach(function (l) { if (!orig[l[1]]) other[l[1]] = 1; });
+    var all = live(id).map(function (l) { return l[1]; });
+    var mine = Object.keys(orig).filter(function (n) { return all.indexOf(n) >= 0; });
+    return { orig: Object.keys(orig), other: Object.keys(other), all: all, known: Object.keys(orig).length > 0,
+      own: alsoOnly ? [] : mine.filter(function (n) { return tuneKind(id, n) === 1; }), borrowed: alsoOnly ? mine : mine.filter(function (n) { return tuneKind(id, n) === 0; }) };
+  }
+  // 1 = the tune first appeared with the original (Zahn prints it under that text), 0 = the original borrowed it, null = not known
+  function tuneKind(id, no) {
+    var root = rootOf(id), r = null;
+    [root, id].forEach(function (x) { (S.byText[x] || []).forEach(function (l) { if (l[1] === no && RELGROUP[l[2]] === 0 && l[5] !== '' && l[5] != null && r === null) r = l[5]; }); });
+    return r;
+  }
+  function tuneYearOk(no, f) {
+    var y = parseInt((S.tunes[no] || [])[9], 10);
+    if (!f.tfrom && !f.tto) return true;
+    if (isNaN(y)) return false;
+    return (!f.tfrom || y >= +f.tfrom) && (!f.tto || y <= +f.tto);
+  }
   function kidsOf(id) {
     var k = (S.kids[id] || []).filter(function (c) { return S.scholar || !hasFlag(T(c), 'nd'); });
     return k.sort(function (a, b) {
@@ -184,7 +214,7 @@
     if (hasFlag(t, 'nd')) extra.push('<span class="badge n">not a first line</span>');
     var h = '<li><div class="node' + (id === here ? ' here' : '') + '">' + langChip(t[1]) +
       '<span class="t">' + (id === here ? esc(t[2]) : textLink(id)) + badge(t[6]) + ' ' + extra.join(' ') + '</span>' +
-      '<span class="a">' + esc(t[3] || '') + (t[3] ? ' · ' : '') + '<span class="id">' + esc(id) + '</span></span>' +
+      '<span class="a">' + esc(stripDates(t[3])) + (t[3] ? ' · ' : '') + '<span class="id">' + esc(id) + '</span></span>' +
       (t[5] && t[9] ? '<span class="a evidence">' + esc(t[9]) + '</span>' : '') + '</div>';
     if (depth < 8) {
       var kids = kidsOf(id);
@@ -208,6 +238,13 @@
     return h + '</li>';
   }
 
+  function kindNote(l) {
+    if (RELGROUP[l[2]] !== 0) return '';
+    var k = tuneKind(l[0], l[1]), u = S.tunes[l[1]] || [];
+    if (k === 1) return ' · <b>own tune</b>';
+    if (k === 0) return ' · <b>borrowed</b>: first printed with “' + esc((u[5] || '').replace(/[,;.]?\s*$/, '')) + '”';
+    return '';
+  }
   // ------------------------------------------------------------------ tunes of a text
   function tuneRows(ls, opts) {
     opts = opts || {};
@@ -227,7 +264,7 @@
           var u = S.tunes[l[1]] || [];
           return '<li><span class="lang tune">' + esc(u[1] || '') + '</span><div class="main">' + tuneLink(l[1]) +
             ' <span class="first">' + esc(u[5] || '') + '</span>' + badge(l[3]) + '</div>' +
-            '<div class="sub">' + esc([u[7], u[9]].filter(Boolean).join(', ')) + ' · ' + esc(REL[l[2]] || l[2]) + '</div>' +
+            '<div class="sub">' + esc([u[7], u[9]].filter(Boolean).join(', ')) + ' · ' + esc(REL[l[2]] || l[2]) + kindNote(l) + '</div>' +
             (S.ev[l[4]] ? '<div class="sub evidence">' + esc(S.ev[l[4]]) + '</div>' : '') + '</li>';
         }).join('') + '</ul>';
     });
@@ -235,16 +272,46 @@
   }
 
   // ------------------------------------------------------------------ views
+  var FILTER_LANGS = [['de', 'German'], ['en', 'English'], ['da', 'Danish'], ['no', 'Norwegian'], ['nn', 'Nynorsk'], ['sv', 'Swedish'], ['fi', 'Finnish'], ['cs', 'Czech'], ['sk', 'Slovak'], ['pl', 'Polish'], ['es', 'Spanish']];
+  var PDLABEL = { pd: 'Public domain', pd70: 'Likely public domain (life + 70)', cr: 'Probably in copyright', '': 'Copyright not known' };
+  function blankFilters() { return { langs: [], origin: '', hymnal: '', author: '', meter: '', tune: '', link: '', from: '', to: '', pd: '', tfrom: '', tto: '', fam: '' }; }
+  function filtersOn(f) { return f.langs.length || f.origin || f.hymnal || f.author || f.meter || f.tune || f.link || f.from || f.to || f.pd || f.tfrom || f.tto || f.fam; }
+
   function viewHome() {
     setTitle('');
     var m = S.meta, L = m.langs || {};
+    var f = S.state.f = S.state.f || blankFilters();
+    var hs = S.hymnals.slice().sort(function (a, b) { return natcmp(a.name, b.name); });
     var v = view(
       '<div class="home-grid"><div class="section">' +
       '<h1>Which tune goes with this text, where does it come from, and is there already a translation?</h1>' +
-      '<p class="lede">Search a first line in German, Danish, Norwegian, Swedish, English, Finnish, Czech or Slovak, an author or translator, a Zahn number or a text ID.</p>' +
+      '<p class="lede">Search a first line in German, Danish, Norwegian, Swedish, English, Finnish, Czech or Slovak, an author or translator, a Zahn number or a text ID (EN-05224, de 295).</p>' +
       '<form class="searchbox" role="search" id="sform"><label for="q" class="skip">Search</label>' +
       '<input type="search" id="q" autocomplete="off" spellcheck="false" placeholder="e.g. Nun danket alle Gott, Winkworth, 5142, Af Dybsens Nød"></form>' +
       '<p class="search-hint">Old spellings match modern ones (Thür and Tür, seyn and sein). Diacritics are ignored.</p>' +
+      '<details class="adv" id="adv"' + (filtersOn(f) ? ' open' : '') + '><summary>Advanced search</summary><div class="adv-grid">' +
+      '<div><span style="font-size:var(--t-sm);font-weight:500">Language of the text</span><div class="langs">' + FILTER_LANGS.map(function (l) {
+        return '<label><input type="checkbox" name="fl" value="' + l[0] + '"' + (f.langs.indexOf(l[0]) >= 0 ? ' checked' : '') + '> ' + l[1] + '</label>'; }).join('') + '</div></div>' +
+      '<label for="f-origin">Language of the original<select id="f-origin"><option value="">Any</option>' + [['de', 'German'], ['la', 'Latin (via German)'], ['da', 'Danish'], ['no', 'Norwegian'], ['sv', 'Swedish'], ['en', 'English (no other original)'], ['cs', 'Czech'], ['fi', 'Finnish'], ['none', 'Original not identified']].map(function (o) {
+        return '<option value="' + o[0] + '"' + (f.origin === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
+      '<label for="f-hymnal">In hymnal<select id="f-hymnal"><option value="">Any</option>' + hs.map(function (h) {
+        return '<option value="' + esc(h.code) + '"' + (f.hymnal === h.code ? ' selected' : '') + '>' + esc(h.name) + '</option>'; }).join('') + '</select></label>' +
+      '<label for="f-author">Author or translator<input type="text" id="f-author" value="' + esc(f.author) + '" placeholder="e.g. Gerhardt"></label>' +
+      '<label for="f-meter">Meter<input type="text" id="f-meter" value="' + esc(f.meter) + '" placeholder="e.g. 8.7.8.7"></label>' +
+      '<label for="f-tune">Tune<select id="f-tune">' + [['', 'Any'], ['yes', 'Has a Zahn tune'], ['orig', 'Original\'s melody (own or borrowed)'], ['own', 'Own tune'], ['borrowed', 'Only borrowed tunes'], ['other', 'Another melody'], ['unk', 'Tune, original unknown'], ['no', 'No tune recorded']].map(function (o) {
+        return '<option value="' + o[0] + '"' + (f.tune === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
+      '<label for="f-fam">Place in the family tree<select id="f-fam">' + [['', 'Any'], ['orig', 'Originals only (top of the tree)'], ['origk', 'Originals that have translations'], ['tr', 'Translations only']].map(function (o) {
+        return '<option value="' + o[0] + '"' + (f.fam === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
+      '<label for="f-link">Link to the original<select id="f-link">' + [['', 'Any'], ['sure', 'From the source (no label)'], ['p', 'Probable'], ['c', 'Check'], ['none', 'No original linked']].map(function (o) {
+        return '<option value="' + o[0] + '"' + (f.link === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
+      '<label for="f-pd">Copyright status<select id="f-pd">' + [['', 'Any (show everything)'], ['pd', 'Public domain'], ['pd+', 'Public domain or likely (life + 70)'], ['cr', 'Probably in copyright'], ['unk', 'Not known']].map(function (o) {
+        return '<option value="' + o[0] + '"' + (f.pd === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
+      '<label for="f-tfrom">Tune year from<input type="text" id="f-tfrom" inputmode="numeric" value="' + esc(f.tfrom) + '" placeholder="1524"></label>' +
+      '<label for="f-tto">Tune year to<input type="text" id="f-tto" inputmode="numeric" value="' + esc(f.tto) + '" placeholder="1700"></label>' +
+      '<label for="f-from">Text year from<input type="text" id="f-from" inputmode="numeric" value="' + esc(f.from) + '" placeholder="1520"></label>' +
+      '<label for="f-to">Text year to<input type="text" id="f-to" inputmode="numeric" value="' + esc(f.to) + '" placeholder="1800"></label>' +
+      '</div><div class="adv-actions"><button type="button" class="btn primary" id="f-apply">Apply filters</button><button type="button" class="btn" id="f-clear">Clear filters</button>' +
+      '<span class="muted" style="font-size:var(--t-sm)">Filters work with or without words in the search box, and all filters must match (AND). “Own tune” means Zahn prints the tune under the original hymn (it first appeared with it); “only borrowed” means the original had no tune of its own: every melody it was sung to was first printed with another text; “another melody” is a tune the original does not have. Tune years narrow to those tunes. “Originals” are the hymns at the top of a family tree, whatever their tune; a text with no original linked counts as an original. The year is the date the source gives for the text (Zahn\'s earliest tune year for German texts). Copyright status is guidance from print dates and death dates, not legal advice: see <a href="#about">About</a>.</span></div></details>' +
       '<div id="results"></div></div>' +
       '<aside class="browse card"><div><h3>Browse tunes</h3><ul><li><a href="#tunes-az">By first line, A–Z</a></li>' +
       '<li><a href="#tunes-zahn">By Zahn number</a></li><li><a href="#tunes-meter">By meter</a></li></ul></div>' +
@@ -259,9 +326,20 @@
     var q = $('#q', v);
     q.value = S.state.q || '';
     var timer;
-    q.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(function () { S.state.q = q.value; runSearch(q.value); }, 120); });
-    $('#sform', v).addEventListener('submit', function (e) { e.preventDefault(); S.state.q = q.value; runSearch(q.value); });
-    if (q.value) runSearch(q.value); else showExamples();
+    function go() { S.state.q = q.value; S.state.lim = 60; runSearch(q.value); }
+    q.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(go, 150); });
+    $('#sform', v).addEventListener('submit', function (e) { e.preventDefault(); go(); });
+    function readFilters() {
+      f.langs = Array.prototype.slice.call(v.querySelectorAll('input[name="fl"]:checked')).map(function (x) { return x.value; });
+      f.origin = $('#f-origin', v).value; f.hymnal = $('#f-hymnal', v).value; f.author = $('#f-author', v).value.trim();
+      f.meter = $('#f-meter', v).value.trim(); f.tune = $('#f-tune', v).value; f.link = $('#f-link', v).value; f.fam = $('#f-fam', v).value;
+      f.from = $('#f-from', v).value.trim(); f.to = $('#f-to', v).value.trim(); f.pd = $('#f-pd', v).value; f.tfrom = $('#f-tfrom', v).value.trim(); f.tto = $('#f-tto', v).value.trim();
+    }
+    $('#f-apply', v).addEventListener('click', function () { readFilters(); go(); });
+    v.querySelectorAll('#adv select, #adv input[type="checkbox"]').forEach(function (el) { el.addEventListener('change', function () { readFilters(); go(); }); });
+    v.querySelectorAll('#adv input[type="text"]').forEach(function (el) { el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); readFilters(); go(); } }); });
+    $('#f-clear', v).addEventListener('click', function () { S.state.f = blankFilters(); viewHome(); });
+    if (q.value || filtersOn(f)) runSearch(q.value); else showExamples();
     if (window.matchMedia('(min-width: 700px)').matches) q.focus();
   }
 
@@ -274,7 +352,7 @@
     var t = T(id);
     return '<li>' + langChip(t[1]) + '<div class="main"><span class="first">' + textLink(id) + '</span>' + badge(t[6]) +
       (flagVal(t, 'dup:') ? ' <span class="badge n">duplicate</span>' : '') + '</div>' +
-      '<div class="sub">' + esc(t[3] || '') + (t[3] ? ' · ' : '') + '<span class="id">' + esc(id) + '</span>' +
+      '<div class="sub">' + esc(stripDates(t[3])) + (t[3] ? ' · ' : '') + '<span class="id">' + esc(id) + '</span>' +
       (t[5] && T(t[5]) ? ' · from ' + esc(LANGS[T(t[5])[1]] || '') + ' “' + esc(T(t[5])[2]) + '”' : '') + '</div></li>';
   }
   function tuneRow(no) {
@@ -283,18 +361,85 @@
       '<div class="sub">' + esc([u[7], u[9], u[4]].filter(Boolean).join(' · ')) + '</div></li>';
   }
 
-  function search(q) {
+  // "en-05224", "EN 5224", "de295" -> a text ID that exists
+  function idFromQuery(raw) {
+    var m = /^\s*([a-z]{2})[\s\-_.]*0*(\d{1,5})\s*$/i.exec(raw);
+    if (!m) return '';
+    var pre = m[1].toUpperCase(), n = m[2];
+    for (var w = 4; w <= 5; w++) {
+      var id = pre + '-' + (new Array(Math.max(0, w - n.length) + 1).join('0')) + n;
+      if (T(id)) return id;
+    }
+    return '';
+  }
+  function originLang(t) {
+    var r = T(rootOf(t[0]));
+    if (!t[5]) return '';
+    if (r && r[1] === 'de' && /latin|lat\./i.test(r[3] + ' ' + (r[9] || ''))) return 'la';
+    return r ? r[1] : '';
+  }
+  function matchFilters(t, f) {
+    if (f.langs.length && f.langs.indexOf(t[1]) < 0) return false;
+    if (f.origin) {
+      var o = originLang(t);
+      if (f.origin === 'none') { if (t[5] || t[1] === 'de') return false; }
+      else if (f.origin === 'en') { if (t[1] !== 'en' || t[5]) return false; }
+      else if (f.origin === 'de') { if (!(t[5] && (o === 'de' || o === 'la'))) return false; }
+      else if (o !== f.origin) return false;
+    }
+    if (f.hymnal && !(S.apByText[t[0]] || []).some(function (a) { return a[1] === f.hymnal; })) return false;
+    if (f.author) {
+      var na = norm(f.author), ps = S.pByText[t[0]] || [];
+      if (t.na.indexOf(na) < 0 && !ps.some(function (p) { return p.n.indexOf(na) >= 0; })) return false;
+    }
+    if (f.meter && String(t[4] || '').replace(/[^0-9A-Za-z]+/g, '.').indexOf(f.meter.replace(/[^0-9A-Za-z]+/g, '.')) !== 0) return false;
+    if (f.tune || f.tfrom || f.tto) {
+      var sp = tuneSplit(t[0]);
+      if (f.tune === 'unk' && sp.known) return false;
+      var pool = f.tune === 'own' ? sp.own : f.tune === 'borrowed' ? (sp.own.length ? [] : sp.borrowed) : f.tune === 'orig' ? sp.orig.filter(function (n) { return sp.all.indexOf(n) >= 0; }) : f.tune === 'other' ? (sp.known ? sp.other : []) : sp.all;
+      if (f.tune === 'no') { if (sp.all.length) return false; }
+      else if (!pool.some(function (n) { return tuneYearOk(n, f); })) return false;
+    }
+    if (f.fam) {
+      if (f.fam === 'tr' && !t[5]) return false;
+      if ((f.fam === 'orig' || f.fam === 'origk') && t[5]) return false;
+      if (f.fam === 'origk' && !(S.kids[t[0]] || []).length) return false;
+    }
+    if (f.link) {
+      if (f.link === 'none') { if (t[5]) return false; }
+      else if (f.link === 'sure') { if (!t[5] || t[6]) return false; }
+      else if (t[6] !== f.link) return false;
+    }
+    if (f.pd) {
+      var pc = t[10] || '';
+      if (f.pd === 'pd' && pc !== 'pd') return false;
+      if (f.pd === 'pd+' && pc !== 'pd' && pc !== 'pd70') return false;
+      if (f.pd === 'cr' && pc !== 'cr') return false;
+      if (f.pd === 'unk' && pc) return false;
+    }
+    if (f.from || f.to) {
+      var y = parseInt(t[8], 10);
+      if (!y) return false;
+      if (f.from && y < parseInt(f.from, 10)) return false;
+      if (f.to && y > parseInt(f.to, 10)) return false;
+    }
+    return true;
+  }
+
+  function search(q, f) {
     var nq = norm(q), raw = q.trim();
     var out = { texts: [], tunes: [], people: [] };
-    if (!nq) return out;
-    var idq = raw.toUpperCase();
-    if (T(idq)) out.texts.push([0, idq]);
-    if (S.tunes[raw.toLowerCase()]) out.tunes.push([0, raw.toLowerCase()]);
-    if (/^\d+$/.test(raw)) {
-      S.tlistTunes.forEach(function (u) { if (u[0] !== raw && u[0].replace(/[a-z]+$/, '') === raw) out.tunes.push([1, u[0]]); });
+    var fon = f && filtersOn(f);
+    if (!nq && !fon) return out;
+    var idq = idFromQuery(raw);
+    if (idq && (!fon || matchFilters(T(idq), f))) out.texts.push([0, idq]);
+    if (!fon) {
+      if (S.tunes[raw.toLowerCase()]) out.tunes.push([0, raw.toLowerCase()]);
+      if (/^\d+$/.test(raw)) S.tlistTunes.forEach(function (u) { if (u[0] !== raw && u[0].replace(/[a-z]+$/, '') === raw) out.tunes.push([1, u[0]]); });
     }
-    var toks = nq.split(' ');
+    var toks = nq ? nq.split(' ') : [];
     function score(n) {
+      if (!nq) return 5;
       if (!n) return -1;
       if (n === nq) return 1;
       if (n.indexOf(nq) === 0) return 2;
@@ -302,17 +447,22 @@
       for (var i = 0; i < toks.length; i++) if (words.indexOf(' ' + toks[i]) < 0) return n.indexOf(nq) >= 0 ? 4 : -1;
       return 3;
     }
-    S.tlist.forEach(function (t) {
+    if (!idq || fon) S.tlist.forEach(function (t) {
       if (hasFlag(t, 'nd') && !S.scholar) return;
+      if (t[0] === idq) return;
+      if (fon && !matchFilters(t, f)) return;
       var s = score(t.n);
       if (s < 0) { s = score(t.na); if (s >= 0) s += 4; }
-      if (s >= 0 && t[0] !== idq) out.texts.push([s + (flagVal(t, 'dup:') ? 0.5 : 0), t[0]]);
+      if (s >= 0) out.texts.push([s + (flagVal(t, 'dup:') ? 0.5 : 0), t[0]]);
     });
-    if (!/^\d+$/.test(raw)) S.tlistTunes.forEach(function (u) {
-      var s = score(u.n);
-      if (s >= 0 && s < 4) out.tunes.push([s + 1, u[0]]);
+    if (nq && !fon && !/^\d+$/.test(raw) && !idq) S.tlistTunes.forEach(function (u) { var s = score(u.n); if (s >= 0 && s < 4) out.tunes.push([s + 1, u[0]]); });
+    if (nq && !fon && !/^\d+$/.test(raw) && !idq) Object.keys(S.tunenames).forEach(function (no) {
+      if (!S.tunes[no]) return;
+      var best = -1;
+      S.tunenames[no].forEach(function (nm) { var s = score(norm(nm[0])); if (s >= 0 && s < 4 && (best < 0 || s < best)) best = s; });
+      if (best >= 0 && !out.tunes.some(function (x) { return x[1] === no; })) out.tunes.push([best + 1, no]);
     });
-    S.people.forEach(function (p) { var s = score(p.n); if (s >= 0) out.people.push([s, p.slug, p.t.length + p.m.length]); });
+    if (nq && !fon && !idq) S.people.forEach(function (p) { var s = score(p.n); if (s >= 0) out.people.push([s, p.slug, p.t.length + p.m.length]); });
     out.texts.sort(function (a, b) { return a[0] - b[0] || T(a[1])[2].length - T(b[1])[2].length || natcmp(a[1], b[1]); });
     out.tunes.sort(function (a, b) { return a[0] - b[0] || natcmp(a[1], b[1]); });
     out.people.sort(function (a, b) { return a[0] - b[0] || b[2] - a[2]; });
@@ -322,25 +472,77 @@
   function runSearch(q) {
     var box = $('#results');
     if (!box) return;
-    if (!q.trim()) { showExamples(); return; }
-    var r = search(q);
+    var f = S.state.f || blankFilters();
+    if (!q.trim() && !filtersOn(f)) { showExamples(); return; }
+    var r = search(q, f);
+    S.state.last = r;
     var lim = S.state.lim || 60;
     var h = '';
     if (r.people.length) {
       h += '<div class="section"><h3>Authors, translators, composers <span class="count">' + r.people.length + '</span></h3><p>' +
         r.people.slice(0, 12).map(function (p) { var P = S.pBySlug[p[1]]; return '<a href="#person-' + P.slug + '">' + esc(P.name) + '</a> <span class="muted">(' + p[2] + ')</span>'; }).join(' · ') + '</p></div>';
     }
-    h += '<div class="section"><h3>Texts <span class="count">' + fmt(r.texts.length) + '</span></h3>';
+    h += '<div class="section"><h3>Texts <span class="count">' + fmt(r.texts.length) + (filtersOn(f) ? ' (filtered)' : '') + '</span></h3>';
     if (r.texts.length) h += '<ul class="rows">' + r.texts.slice(0, lim).map(function (x) { return textRow(x[1]); }).join('') + '</ul>';
-    else h += '<p class="muted">No text matches “' + esc(q) + '”. Try fewer words, or the first two words of the line.</p>';
-    if (r.texts.length > lim) h += '<p class="more"><button class="btn" id="more">Show more texts</button></p>';
-    h += '</div>';
+    else h += '<p class="muted">No text matches' + (q.trim() ? ' “' + esc(q) + '”' : '') + (filtersOn(f) ? ' with these filters' : '') + '. Try fewer words or fewer filters.</p>';
+    h += '<div class="result-tools">' + (r.texts.length > lim ? '<button class="btn" id="more">Show ' + Math.min(200, r.texts.length - lim) + ' more</button>' : '') +
+      (r.texts.length ? '<button class="btn" id="xlsx">Export ' + fmt(r.texts.length) + ' texts to Excel</button>' : '') +
+      '<button class="btn" id="totop">↑ Back to top</button><span class="muted" id="xlsx-note" style="font-size:var(--t-sm)"></span></div></div>';
     if (r.tunes.length) h += '<div class="section"><h3>Tunes <span class="count">' + fmt(r.tunes.length) + '</span></h3><ul class="rows">' +
       r.tunes.slice(0, 30).map(function (x) { return tuneRow(x[1]); }).join('') + '</ul>' +
       (r.tunes.length > 30 ? '<p class="muted">First 30 shown. Narrow the search, or <a href="#tunes-az">browse the tunes</a>.</p>' : '') + '</div>';
     box.innerHTML = h;
     var mb = $('#more');
-    if (mb) mb.addEventListener('click', function () { S.state.lim = lim + 100; runSearch(q); });
+    if (mb) mb.addEventListener('click', function () { S.state.lim = lim + 200; runSearch(q); });
+    $('#totop').addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); var qq = $('#q'); if (qq) qq.focus({ preventScroll: true }); });
+    var xb = $('#xlsx');
+    if (xb) xb.addEventListener('click', function () { exportXlsx(r.texts.map(function (x) { return x[1]; }), q); });
+  }
+
+  function exportRows(ids) {
+    return ids.map(function (id) {
+      var t = T(id), o = t[5] ? T(rootOf(id)) : null, par = t[5] ? T(t[5]) : null;
+      var tunes = (S.byText[id] || []).filter(function (l) { return l[3] !== 'x'; }).map(function (l) { return l[1]; });
+      var seen = {}; tunes = tunes.filter(function (x) { if (seen[x]) return false; seen[x] = 1; return true; });
+      return {
+        'ID': id, 'Language': LANGS[t[1]] || t[1], 'First line': t[2],
+        'Author / translator': (S.pByText[id] || []).map(function (p) { return p.name; }).join('; ') || stripDates(t[3]),
+        'Credit as printed': t[3], 'Meter': t[4], 'Year': t[8], 'Copyright status (guidance)': PDLABEL[t[10] || ''], 'Copyright basis': t[11] || '',
+        'Translated from (ID)': t[5] || '', 'Translated from (first line)': par ? par[2] : '',
+        'Link to original': t[5] ? (BADGE[t[6]] || 'from the source') : '',
+        'Original (root) ID': o ? o[0] : '', 'Original (root) first line': o ? o[2] : '', 'Original language': o ? (LANGS[o[1]] || o[1]) : '',
+        'Zahn tunes': tunes.join(' '),
+        'Original\'s melodies': (function () { var sp = tuneSplit(id); return sp.orig.filter(function (n) { return sp.all.indexOf(n) >= 0; }).join(' '); })(),
+        'Own tune': (function () { return tuneSplit(id).own.join(' '); })(),
+        'Borrowed tunes': (function () { return tuneSplit(id).borrowed.join(' '); })(),
+        'Place in family': T(id)[5] ? 'translation' : 'original',
+        'Other melodies': (function () { var sp = tuneSplit(id); return sp.known ? sp.other.join(' ') : ''; })(), 'Hymnals': (S.apByText[id] || []).map(function (a) { return a[1] + ' ' + a[2]; }).join('; '),
+        'Page': SITE + '#text-' + id
+      };
+    });
+  }
+  function exportXlsx(ids, q) {
+    var note = $('#xlsx-note');
+    function write() {
+      try {
+        var ws = window.XLSX.utils.json_to_sheet(exportRows(ids));
+        ws['!cols'] = [10, 10, 48, 28, 28, 14, 6, 12, 40, 14, 12, 40, 12, 18, 30, 40].map(function (w) { return { wch: w }; });
+        var wb = window.XLSX.utils.book_new();
+        window.XLSX.utils.book_append_sheet(wb, ws, 'Search results');
+        var meta = window.XLSX.utils.aoa_to_sheet([['Tunes and Texts: Lutheran Hymns in German, Scandinavian and English'], ['Search', q || ''], ['Filters', JSON.stringify(S.state.f)],
+          ['Exported', new Date().toISOString().slice(0, 10)], ['Release', S.meta.release + ', ' + S.meta.base], ['License', 'CC0 for the project\'s own work; first lines and credits remain subject to their sources\' terms']]);
+        window.XLSX.utils.book_append_sheet(wb, meta, 'About');
+        window.XLSX.writeFile(wb, 'Tunes_and_Texts_search_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+        if (note) note.textContent = /github\.io$|localhost/.test(location.hostname) ? 'Downloaded.' : 'Saved — if nothing downloaded, this preview blocks downloads; the live site allows them.';
+      } catch (e) { if (note) note.textContent = 'Export failed: ' + e.message; }
+    }
+    if (window.XLSX) return write();
+    if (note) note.textContent = 'Preparing the file…';
+    var sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    sc.onload = write;
+    sc.onerror = function () { if (note) note.textContent = 'The Excel library could not be loaded.'; };
+    document.head.appendChild(sc);
   }
 
   function viewText(id) {
@@ -358,10 +560,11 @@
     if (hasFlag(t, 'title')) notes.push('<div class="notice amber">A title, not a first line.</div>');
     if (hasFlag(t, 'notr')) notes.push('<div class="notice amber">Not a translation of a German text.</div>');
     if (t[6] && parent) notes.push('<div class="notice amber">The link to the original is <b>' + BADGE[t[6]] + '</b>.' +
-      (t[9] ? ' <span class="evidence" style="display:inline;border:0;padding:0">Basis: ' + esc(t[9]) + '</span>' : ' Turn on scholar view to see the evidence.') + '</div>');
+      (t[9] ? ' <span class="scholar-only">Basis: ' + esc(t[9]) + '</span>' : ' Turn on scholar view to see the evidence.') + '</div>');
     var people = S.pByText[id] || [];
-    var auth = t[3] ? (people.length ? people.map(function (p) { return '<a href="#person-' + p.slug + '">' + esc(p.name) + '</a>'; }).join('; ') +
-      (people.length && norm(people.map(function (p) { return p.name; }).join(' ')) !== norm(t[3]) ? ' <span class="muted">(' + esc(t[3]) + ')</span>' : '') : esc(t[3])) : '';
+    var auth = people.length ? people.map(function (p) { return '<a href="#person-' + p.slug + '">' + esc(p.name) + '</a>'; }).join('; ') +
+      (t[3] ? ' <span class="scholar-only">(as printed: ' + esc(t[3]) + ')</span>' : '')
+      : esc(stripDates(t[3]));
     var ext = extLinks(t).map(function (l) { return '<a href="' + esc(l[1]) + '" rel="noopener">' + esc(l[0]) + '</a>'; }).join('');
 
     // tunes: this text's own links, else the nearest original's
@@ -379,7 +582,7 @@
     var ap = (S.apByText[id] || []).slice().sort(function (a, b) { return natcmp(a[1], b[1]) || natcmp(a[2], b[2]); });
     var apHtml = ap.length ? '<ul class="plain">' + ap.map(function (a) {
       var h = S.hymByCode[a[1]];
-      return '<li><a href="#hymnal-' + h.slug + '">' + esc(h.name) + '</a> <span class="mono">' + esc(a[2]) + '</span>' +
+      return '<li><a href="#hymnal-' + h.slug + '">' + esc(h.name) + '</a> ' + (a[7] ? '<a class="mono" href="' + esc(a[7]) + '" rel="noopener">' + esc(a[2]) + ' (scan)</a>' : '<span class="mono">' + esc(a[2]) + '</span>') +
         (a[3] && norm(a[3]) !== t.n ? ' <span class="muted">“' + esc(a[3]) + '”</span>' : '') +
         (a[4] ? ' · printed with ' + a[4].split(' ').map(tuneLink).join(', ') + badge(a[6]) : '') + '</li>';
     }).join('') + '</ul>' : '<p class="muted">Not in any of the indexed hymnals.</p>';
@@ -389,7 +592,7 @@
       '<div class="record-head">' + '<div>' + langChip(t[1]) + ' <span class="muted">' + esc(LANGS[t[1]] || '') + '</span></div>' +
       '<h1>' + esc(t[2]) + '</h1><div class="meta">' + (auth ? '<span><b>' + (t[1] === 'de' || !parent ? 'Author' : 'Translator / credit') + ':</b> ' + auth + '</span>' : '') +
       (t[4] ? '<span><b>Meter:</b> <a href="#meter-' + t[4].replace(/[^0-9A-Za-z]+/g, '-') + '">' + esc(t[4]) + '</a></span>' : '') +
-      (t[8] ? '<span><b>Year:</b> ' + esc(t[8]) + '</span>' : '') + '<span class="id">' + esc(id) + '</span></div>' +
+      (t[8] ? '<span><b>Year:</b> ' + esc(t[8]) + '</span>' : '') + '<span class="pd pd-' + (t[10] || 'unk') + '" title="' + esc(t[11] || 'No print date or death date known') + '">' + PDLABEL[t[10] || ''] + '</span>' + '<span class="id">' + esc(id) + '</span></div>' +
       (ext ? '<div class="extlinks">' + ext + '</div>' : '') + notes.join('') + '</div>' +
       '<div class="two"><div class="section"><h2>Family of translations <span class="count">' + treeSize + ' text' + (treeSize === 1 ? '' : 's') + '</span></h2>' +
       (treeSize === 1 ? '<p class="muted">No translation or original of this text is recorded yet.</p>' : '') +
@@ -551,14 +754,11 @@
   function viewPeople(letter) {
     setTitle('Authors and translators');
     letter = (letter || 'a').toLowerCase();
-    var list = S.people.filter(function (p) {
-      var n = norm(p.name.replace(/^([A-Z][a-z]?\.\s*)+/, ''));
-      return (n[0] || '#') === letter;
-    }).sort(function (a, b) { return natcmp(a.name, b.name); });
-    view('<h1>Authors, translators and composers</h1><p class="lede">Names as the sources print them. The same person can appear under more than one form (J. Rist, Rist, Johann Rist) until the name lists are merged.</p>' +
+    var list = S.people.filter(function (p) { return p.letter === letter; }).sort(function (a, b) { return natcmp(norm(a.sort), norm(b.sort)); });
+    view('<h1>Authors, translators and composers</h1><p class="lede">By surname. Spellings of one name (J. Rist, Rist, Johann Rist) are listed together; a person\'s page shows every form the sources print. A surname alone stays separate when several people share it.</p>' +
       '<div class="letters">' + 'abcdefghijklmnopqrstuvwxyz'.split('').map(function (l) { return '<a href="#people-' + l + '"' + (l === letter ? ' class="on"' : '') + '>' + l.toUpperCase() + '</a>'; }).join('') + '</div>' +
       '<ul class="plain cols">' + list.map(function (p) {
-        return '<li><a href="#person-' + p.slug + '">' + esc(p.name) + '</a> <span class="muted">' + [p.t.length ? p.t.length + ' text' + (p.t.length > 1 ? 's' : '') : '', p.m.length ? p.m.length + ' tune' + (p.m.length > 1 ? 's' : '') : ''].filter(Boolean).join(', ') + '</span></li>';
+        return '<li><a href="#person-' + p.slug + '">' + esc(p.sort) + '</a> <span class="muted">' + [p.t.length ? p.t.length + ' text' + (p.t.length > 1 ? 's' : '') : '', p.m.length ? p.m.length + ' tune' + (p.m.length > 1 ? 's' : '') : ''].filter(Boolean).join(', ') + '</span></li>';
       }).join('') + '</ul>');
   }
   function viewPerson(slug) {
@@ -568,7 +768,8 @@
     S.current = { kind: 'person', id: slug, label: p.name };
     var texts = p.t.filter(T).sort(function (a, b) { var A = T(a), B = T(b); return (LORDER.indexOf(A[1]) - LORDER.indexOf(B[1])) || natcmp(A[2], B[2]); });
     var tunes = p.m.slice().sort(natcmp);
-    view('<div class="crumbs"><a href="#people">Authors</a><span>›</span></div><h1>' + esc(p.name) + '</h1>' +
+    view('<div class="crumbs"><a href="#people-' + p.letter + '">Authors</a><span>›</span></div><h1>' + esc(p.name) + '</h1>' +
+      (p.variants && p.variants.length ? '<p class="variants">Also printed as: ' + p.variants.map(esc).join(' · ') + '</p>' : '') +
       '<div class="two"><div class="section"><h2>Texts <span class="count">' + texts.length + '</span></h2>' +
       (texts.length ? '<ul class="rows">' + texts.map(textRow).join('') + '</ul>' : '<p class="muted">None.</p>') + '</div>' +
       '<div class="section"><h2>Tunes (as composer or source) <span class="count">' + tunes.length + '</span></h2>' +
@@ -579,13 +780,13 @@
   function viewHymnals() {
     setTitle('Hymnals');
     var groups = {};
-    S.hymnals.forEach(function (h) { var k = h.kind === 'reference' ? 'ref' : h.lang; (groups[k] = groups[k] || []).push(h); });
-    var order = [['en', 'English'], ['da', 'Danish'], ['no', 'Norwegian'], ['fi', 'Finnish'], ['cs', 'Czech'], ['sk', 'Slovak'], ['ref', 'Reference works and collections']];
-    view('<h1>Hymnals</h1><p class="lede">The hymnals and collections whose numbers are in the index. Codes are hymnary.org\'s where the data came from there.</p>' +
+    S.hymnals.forEach(function (h) { var k = h.kind === 'reference' ? 'ref' : h.kind === 'collection' ? 'col' : h.lang; (groups[k] = groups[k] || []).push(h); });
+    var order = [['en', 'English hymnals'], ['col', 'English translation collections'], ['da', 'Danish'], ['no', 'Norwegian'], ['sv', 'Swedish'], ['fi', 'Finnish'], ['cs', 'Czech'], ['sk', 'Slovak'], ['ref', 'Reference works']];
+    view('<h1>Hymnals</h1><p class="lede">The hymnals and collections whose numbers are in the index, oldest first in each group.</p>' +
       '<div class="hymnal-groups">' + order.filter(function (o) { return groups[o[0]]; }).map(function (o) {
-        return '<div class="section"><h2>' + o[1] + '</h2><ul class="rows">' + groups[o[0]].sort(function (a, b) { return natcmp(a.name, b.name); }).map(function (h) {
+        return '<div class="section"><h2>' + o[1] + '</h2><ul class="rows">' + groups[o[0]].sort(function (a, b) { return natcmp(a.year || '9999', b.year || '9999') || natcmp(a.name, b.name); }).map(function (h) {
           return '<li><span class="lang">' + esc(h.lang) + '</span><div class="main"><a href="#hymnal-' + h.slug + '">' + esc(h.name) + '</a></div><div class="sub">' +
-            (h.name !== h.code ? '<span class="mono">' + esc(h.code) + '</span> · ' : '') + fmt(h.n) + ' entries</div></li>';
+            (h.pub ? esc(h.pub.replace(/\s*\[hymnary[^\]]*\]/, '')) + ' · ' : '') + fmt(h.n) + ' entries</div></li>';
         }).join('') + '</ul></div>';
       }).join('') + '</div>');
   }
@@ -603,12 +804,12 @@
     S.current = { kind: 'hymnal', id: slug, label: h.name };
     var rows = (S.apByHym[h.code] || []).slice().sort(function (a, b) { return natcmp(a[2], b[2]) || natcmp(a[3], b[3]); });
     view('<div class="crumbs"><a href="#hymnals">Hymnals</a><span>›</span><span class="mono">' + esc(h.code) + '</span></div><h1>' + esc(h.name) + '</h1>' +
-      '<p class="lede">' + fmt(rows.length) + ' entries in the index. ' + (h.named ? '' : 'Full title to come; the code is hymnary.org\'s. ') +
+      (h.pub ? '<p class="muted">' + esc(h.pub) + '</p>' : '') + '<p class="lede">' + fmt(rows.length) + ' entries in the index. Code in the data: <span class="mono">' + esc(h.code) + '</span>. ' +
       '<a href="#compare-' + h.slug + '">Compare with another hymnal</a>.</p>' +
       '<div class="tablewrap"><table><thead><tr><th class="num">No.</th><th>First line (as printed)</th><th>Text in the index</th><th>Tunes</th></tr></thead><tbody>' +
       rows.map(function (a) {
         var t = T(a[0]);
-        return '<tr><td class="num mono">' + esc(a[2]) + '</td><td><span class="first">' + esc(a[3] || t[2]) + '</span></td><td>' + langChip(t[1]) + ' ' + textLink(a[0]) + ' <span class="id">' + esc(a[0]) + '</span></td><td>' +
+        return '<tr><td class="num mono">' + (a[7] ? '<a href="' + esc(a[7]) + '" rel="noopener">' + esc(a[2]) + '</a>' : esc(a[2])) + '</td><td><span class="first">' + esc(a[3] || t[2]) + '</span></td><td>' + langChip(t[1]) + ' ' + textLink(a[0]) + ' <span class="id">' + esc(a[0]) + '</span></td><td>' +
           (a[4] ? a[4].split(' ').map(tuneLink).join(', ') + ' <span class="muted">printed</span>' + badge(a[6]) : firstTunes(a[0]).map(tuneLink).join(', ')) +
           (a[5] ? '<div class="muted">' + esc(a[5]) + '</div>' : '') + '</td></tr>';
       }).join('') + '</tbody></table></div>');
@@ -790,6 +991,7 @@
       '<li><span class="badge p">probable</span> one source, or a reading that is very likely but not certain. Shown on purpose, with its evidence.</li>' +
       '<li><span class="badge c">check</span> needs a look.</li><li><span class="badge x">rejected</span> a link once made and later disproved. Kept, with the reason, in scholar view only.</li></ul>' +
       '<p>Turn on <b>Scholar view</b> (top right) to see on every line the source, evidence tags (PR printed page; SC/JV Julian\'s scanned text; KN compiler\'s judgement) and the reasoning, and the full source record of each text and tune.</p>' +
+      '<h2>Copyright status</h2><p>Each text carries a copyright label, worked out from dates; it is guidance, not legal advice. <b>Public domain</b>: printed in a book before 1931 (public domain in the United States), marked Public Domain on hymnary.org, or every credited author and translator died by 1930. <b>Likely public domain (life + 70)</b>: every credited person died 1931–1955 and no printing before 1931 was found; public domain where the term is life + 70 years, but check before using it in the United States. <b>Probably in copyright</b>: hymnary.org gives a copyright notice, or a credited person died in 1956 or later or is living. <b>Not known</b>: no print date or death date to go on. A revised wording can be in copyright even when the older version is free. Death dates come from the authority list (German National Library, GND). Melodies from Zahn (1889–1893) are all public domain; harmonizations in modern hymnals may not be.</p>' +
       '<h2>Method</h2><p>Data were extracted, read and matched with Claude (an AI model by Anthropic): OCR of registers and melody books, reading of opening notes on scanned pages, matching first lines across languages. Every value records its source; uncertain values are labelled; the compiler reviewed the open questions and decided them. Quality control: seeded random samples in 16 batches (QC #2), an automated check of every row and a 500-row random sample (QC #3: serious-error rate at most about 1 % at 95 % confidence), and a full read of the last additions.</p>' +
       '<h2>Credit and license</h2><p>Compiled by John Hutchins. <b>CC0 1.0</b> for this project\'s own contributions: IDs, links, decisions, corrections and readings. Values drawn from the listed sources remain subject to those sources\' terms; see <a href="#sources">Sources</a>. Please credit the sources you use.</p>' +
       '<h2>How to cite</h2><p>Hutchins, John (comp.). <i>Tunes and Texts: Lutheran Hymns in German, Scandinavian and English</i>, release 0.9 (provisional, 2026-11-20). https://tunesandtexts.github.io/</p>' +

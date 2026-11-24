@@ -1,6 +1,6 @@
 # Data dictionary — Tunes and Texts: Lutheran Hymns in German, Scandinavian and English, release 0.9 (provisional, under review)
 
-Generated 2026-11-20 from the 0.9 CSV export (DATA v90, Zahn tune master v16, Zahn texts and links v9; columns trimmed per SOURCE_AUDIT.csv are not listed). One section per CSV file: every column, how many rows have a value, an example, and what it means. Columns ending in **URL** hold the link that the spreadsheet cell to their left carried (Zahn scan, hymnary.org page, Julian page, source scan).
+Generated 2026-11-20 from the 0.9 CSV export (DATA v95, Zahn tune master v16, Zahn texts and links v9; columns trimmed per SOURCE_AUDIT.csv are not listed). One section per CSV file: every column, how many rows have a value, an example, and what it means. Columns ending in **URL** hold the link that the spreadsheet cell to their left carried (Zahn scan, hymnary.org page, Julian page, source scan).
 
 **IDs:** tunes = Zahn no. (with a/b/c variant); texts = DE-/DA-/NO-/SV-/FI-/CS-/SK-/PL-/ES- + number (DE-00001–05897 from Zahn's register, higher DE numbers added by us — provisional unless a source is given); English = EN-xxxxx; sources = vol. VI bibliography numbers.
 **Status words:** confirmed (checked against the source or two agreeing sources) / probable / check (needs a look) / structural (implied by another link).
@@ -12,7 +12,7 @@ Generated 2026-11-20 from the 0.9 CSV export (DATA v90, Zahn tune master v16, Za
 
 ### en_texts.csv (7,389 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'EN Texts'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'EN Texts'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -52,7 +52,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'EN Texts'.
 | Hymnoglypt link basis (2026-11-13) | 1,955 | title | How the post was matched: by title, or by title + English first line found in the post. Where Carver revised a translation, the row listing both dates links to the later post; duplicate rows (see 'Duplicate of (EN ID)') link to the post dated as in their own 'Hymnals' cell (DATA v43). |
 | Duplicate of (EN ID) | 27 | EN-00447 | Set on the later of two rows holding the same Carver translation (same post, same first line; entered twice by the 2026-11-11 gap-fill): the EN ID of the earlier row. Nothing deleted (DATA v43). |
 | First line before QC (2026-11-13) | 40 | O heilige Dreifaltigkeit | The first line as it stood before the QC fix of 2026-11-13 (filled only where 'First line' / 'English first line' was repaired). |
-| First-line QC (2026-11-13) | 57 | NOT A TEXT — import artifact (QC 2026-11-13, owner's answer) | QC note on the first line (2026-11-13): how it was repaired and how sure (certain / probable), or a flag — NOT A FIRST LINE / NOT AN ENGLISH (GERMAN) LINE / TITLE / check. Rows flagged NOT … are kept, not deleted; leave them out of first-line searches. |
+| First-line QC (2026-11-13) | 73 | NOT A TEXT — import artifact (QC 2026-11-13, owner's answer) | QC note on the first line (2026-11-13): how it was repaired and how sure (certain / probable), or a flag — NOT A FIRST LINE / NOT AN ENGLISH (GERMAN) LINE / TITLE / check. Rows flagged NOT … are kept, not deleted; leave them out of first-line searches. |
 | Translator (standard) | 4,279 | Catherine Winkworth | Translator in one standard form (full name where the source makes it clear, e.g. 'Miss Winkworth' → Catherine Winkworth; 'alt.', dates and OCR slips removed); blank where the printed value is unreadable or not a translator. 'Translator' keeps the value as printed. |
 | Translator standard basis (QC 2026-11-13) | 4,325 | as printed | How 'Translator (standard)' was made: as printed / standardised (name form, title, OCR, 'alt.') / incomplete name — as printed / anonymous — book named / unreadable — left blank. |
 | German link before re-check (2026-11-13) | 336 | DE-04369 / exact / German author (hymnary): possible: author | The German link and its basis before the QC re-check of 2026-11-13 (filled only on the 337 rows whose link had rested on an author guess: 'possible: …'). |
@@ -67,10 +67,11 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'EN Texts'.
 | QC2 round 7 (2026-11-19) | 97 | Carver's post: "Allmächtiger ewiger Gott, der du die Welt re | Note from that quality-control round (what was checked or changed). |
 | Original language (QC2 r7, owner 2026-11-19) | 68 | Latin original — Zahn lists the Latin text DE-04973 "Te deum | Original language when it is not German (e.g. Latin), as decided in QC #2 round 7. |
 | QC2 round 8 (2026-11-19) | 3 | Carver's post: "Gelobet sei der Herre" (L. Helmbold), 12-lin | Note from that quality-control round (what was checked or changed). |
+| First line before spell check (2026-11-20) | 245 | Now our worship weet is o'er | The English first line as it stood before the spell check of 2026-11-20 (DATA v91–v92; filled only where the first line was corrected: OCR errors, typos, soft hyphens, words in capitals). |
 
 ### en_tune_links.csv (3,914 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'EN-Tune links'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'EN-Tune links'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -92,7 +93,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'EN-Tune links'.
 
 ### scandinavian_texts.csv (1,106 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian texts'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Scandinavian texts'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -134,10 +135,11 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian texts'.
 | Troens rare Klenodie 1894 (QC 2026-11-13) | 137 | confident: TrK no. 100, p. 132 (Troens rare Klenodie) — http | Where the text is in Troens rare Klenodie (1894 ed.), and what that check found. |
 | Author/translator (from Troens rare Klenodie) | 65 | tr. Brorson (TrK no. 267, p. 350; German original DE-04093)  | Author/translator credit taken from Troens rare Klenodie. |
 | QC2 round 1 (2026-11-14) | 3 | German link DE-00882 removed (wrong author guess) | Note from that quality-control round (what was checked or changed). |
+| First line before spell check (2026-11-23) | 57 | Dit Navn, o Jesu, loker mig | — |
 
 ### scandinavian_tune_links.csv (1,003 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian–Tune links'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Scandinavian–Tune links'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -156,7 +158,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian–Tune links
 
 ### scandinavian_english_links.csv (38 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian–English links'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Scandinavian–English links'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -173,24 +175,24 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian–English li
 | hymnary text | 38 | https://hymnary.org/text/over_kedron_jesus_treadeth | hymnary.org text page. |
 | Status | 38 | confirmed (Claude 2026-11-10: matched by first-line meaning  | how sure the row is: confirmed / probable / check (see README) |
 
-### de_texts_added.csv (2,076 rows)
+### de_texts_added.csv (2,066 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'New DE texts'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'New DE texts'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
-| Text ID | 2,076 | DE-05898 | Project text ID: DE-xxxxx German, DA-/NO-/SV-xxxx Scandinavian. |
-| First line (KGB 1862 spelling) | 2,076 | Herr! Öffne mir die herzensthür | First line (KGB 1862 spelling). |
-| Match key | 2,075 | her ofne mir die herzenstur | Lower-case, umlauts folded, ß→ss, th→t, ey→ei, doubled letters collapsed: used for matching across sources. |
-| Source | 2,076 | Kirchen-Gesangbuch 1862, no. 5 | Where the row comes from. |
-| Status | 2,061 | provisional — not found in Zahn register | how sure the row is: confirmed / probable / check (see README) |
+| Text ID | 2,066 | DE-05898 | Project text ID: DE-xxxxx German, DA-/NO-/SV-xxxx Scandinavian. |
+| First line (KGB 1862 spelling) | 2,066 | Herr! Öffne mir die herzensthür | First line (KGB 1862 spelling). |
+| Match key | 2,066 | her ofne mir die herzenstur | Lower-case, umlauts folded, ß→ss, th→t, ey→ei, doubled letters collapsed: used for matching across sources. |
+| Source | 2,066 | Kirchen-Gesangbuch 1862, no. 5 | Where the row comes from. |
+| Status | 2,051 | provisional — not found in Zahn register | how sure the row is: confirmed / probable / check (see README) |
 | Closest Zahn texts | 42 | DE-04517: Öffne mir die Perlenpforten / DE-02277: Herr, höre | Nearest texts in Zahn's list (ID: first line), to show it is not there. |
 | Best score | 41 | 0.69 | Similarity of the closest one (1 = identical). |
 | Meter (normalized) | 957 | 8.8.8.8 | Syllables per line, dot-separated; L.M./C.M./S.M. and D written out. |
 | Meter source | 959 | its English translations (hymnary), same meter assumed | Where the meter came from (register, tunes, hymnary, inherited). |
-| Note | 441 | Full first line 'O meine Seel! erhebe dich, Mit Andacht zu b | Notes. |
+| Note | 448 | stanza 5 | Notes. |
 | First line before QC (2026-11-13) | 18 | Warum sollen dich so schmerzen (Alt.) | The first line as it stood before the QC fix of 2026-11-13 (filled only where 'First line' / 'English first line' was repaired). |
-| First-line QC (2026-11-13) | 10 | NOT A FIRST LINE — Carver post title (description of the hym | QC note on the first line (2026-11-13): how it was repaired and how sure (certain / probable), or a flag — NOT A FIRST LINE / NOT AN ENGLISH (GERMAN) LINE / TITLE / check. Rows flagged NOT … are kept, not deleted; leave them out of first-line searches. |
+| First-line QC (2026-11-13) | 3 | title (stanza of the Latin hymn), not a German first line | QC note on the first line (2026-11-13): how it was repaired and how sure (certain / probable), or a flag — NOT A FIRST LINE / NOT AN ENGLISH (GERMAN) LINE / TITLE / check. Rows flagged NOT … are kept, not deleted; leave them out of first-line searches. |
 | Author (hymnary, 2026-11-14) | 920 | Johannes Olearius | Author, from hymnary.org or (where noted) another source. |
 | Author source (hymnary, 2026-11-14) | 920 | hymnary German text with the same first line: herr_offne_mir | Where that author comes from. |
 | Date (first known) | 214 | by 1876 | Earliest known date of the text. |
@@ -206,10 +208,11 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'New DE texts'.
 | QC2 round 6 (2026-11-16) | 27 | not a duplicate of DE-05616 (probable): Pontoppidan 1740 no. | Note from that quality-control round (what was checked or changed). |
 | QC2 round 7 (2026-11-19) | 11 | meter still check (step 4): acrostic hymn; Carver's stanza c | Note from that quality-control round (what was checked or changed). |
 | QC2 round 8 (2026-11-19) | 1 | new: Helmbold's Benedictus hymn (12 lines, tune "Nun lob mei | Note from that quality-control round (what was checked or changed). |
+| First line before spell check (2026-11-23) | 9 | Salve caput cruentatum, stanza 5 | — |
 
 ### becker_psalter_schuetz.csv (159 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Becker Psalter (Schütz)'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Becker Psalter (Schütz)'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -231,7 +234,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Becker Psalter (Schütz)'
 
 ### translators.csv (29 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Translators'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Translators'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -242,7 +245,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Translators'.
 
 ### hymnal_appearances.csv (7,906 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Hymnal appearances'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Hymnal appearances'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -267,7 +270,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Hymnal appearances'.
 
 ### scandinavian_appearances.csv (1,760 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian appearances'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Scandinavian appearances'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -281,7 +284,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian appearances'
 
 ### other_language_texts.csv (475 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Other-language texts'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Other-language texts'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -314,7 +317,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Other-language texts'.
 
 ### other_language_tune_links.csv (361 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Other-language–Tune links'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Other-language–Tune links'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -331,7 +334,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Other-language–Tune lin
 
 ### other_language_appearances.csv (494 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Other-language appearances'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Other-language appearances'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -344,7 +347,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Other-language appearance
 
 ### tune_names_to_zahn.csv (1,783 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Tune names → Zahn'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Tune names → Zahn'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -365,7 +368,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Tune names → Zahn'.
 
 ### tune_evidence.csv (531 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Tune evidence'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Tune evidence'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -390,12 +393,12 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Tune evidence'.
 
 ### zahn_tunes.csv (9,538 rows)
 
-From: master.xlsx, sheet 'Sheet1'.
+From: Master_File_linked_v16.xlsx, sheet 'Sheet1'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
 | Zahn no. | 9,538 | 1 | Zahn's tune number as printed (a/b/c… = variant forms). This is the ID used by every link table. |
-| Sort key | 9,538 | 1 | Numeric sort key for the tune number (25a → 25.1, 25b → 25.2); for ordering only — not an ID (in the master file this column is headed 'Zahn no.'). |
+| Zahn no._Original | 9,538 | 1 | — |
 | Vol. | 9,538 | 1 | Zahn volume (1–5). |
 | Zahn page | 9,538 | 5 | Printed page in that volume. |
 | Meter type | 9,537 | Zweizeilig, jambisch | Zahn's meter class (lines, foot). |
@@ -444,7 +447,7 @@ From: master.xlsx, sheet 'Sheet1'.
 
 ### zahn_texts.csv (5,897 rows)
 
-From: texts.xlsx, sheet 'Texts'.
+From: Zahn_texts_and_links_v12.xlsx, sheet 'Texts'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -465,7 +468,7 @@ From: texts.xlsx, sheet 'Texts'.
 | Register page(s) | 5,897 | 501 | Page in Zahn's vol. V text register. |
 | Register notes | 51 | see Ergänzungen vol. II, p. 638 | Note in the register. |
 | First line cleaned? | 519 | yes | yes = the first line was corrected. |
-| Cleanup source | 528 | first line corrected from master incipit of Zahn 2747 | How it was corrected. |
+| Cleanup source | 530 | first line corrected from master incipit of Zahn 2747 | How it was corrected. |
 | Meter (normalized) | 5,754 | 8.7.8.7.7.7 | Syllables per line, dot-separated; L.M./C.M./S.M. and D written out. |
 | Meter source | 5,754 | Zahn register | Where the meter came from (register, tunes, hymnary, inherited). |
 | Author note (QC2 2026-11-14) | 49 | hymnary credits: Friedrich Layritz (filled; owner OK 2026-11 | Note on the author attribution (QC #2). |
@@ -477,10 +480,11 @@ From: texts.xlsx, sheet 'Texts'.
 | Author basis (Carver post, QC2 r5) | 100 | Carver: anonymous (Zahn none) — https://matthaeusglyptes.blo | Basis for the author taken from Carver's post. |
 | First line correction (QC3 2026-11-20) | 21 | Allmächtiger, ewiger Gott | Corrected first line (QC #3: OCR damage in Zahn's register; the register spelling is kept in "Register spelling(s) if different"). |
 | First line correction basis (QC3) | 21 | QC3 2026-11-20: register OCR "Allmäthtiger, ewiger Gott" → " | Basis for that correction. |
+| First line before spell check (2026-11-23) | 17 | Ach | — |
 
 ### zahn_text_tune_links.csv (11,789 rows)
 
-From: texts.xlsx, sheet 'Text-Tune'.
+From: Zahn_texts_and_links_v12.xlsx, sheet 'Text-Tune'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -491,8 +495,8 @@ From: texts.xlsx, sheet 'Text-Tune'.
 | Zahn no(s). in master | 11,789 | 3670 | Matching Zahn number(s) in the master file. |
 | Match | 11,789 | exact | How the printed number matched the master (exact / letter added …). |
 | Relation | 11,789 | written for / borrowed | Kind of link (printed with this tune in a hymnal / melody listed under the source text / named as Mel. …). |
-| Zahn volume | 11,789 | II | Volume. |
-| Register page | 11,789 | 501 | Register page. |
+| Tune in Zahn vol. | 11,789 | II | Volume of Zahn that holds the tune (I–V; "V (Ergänzungen)" = the supplements). Not the volume of the register. |
+| Register page (Zahn vol. V) | 11,789 | 501 | Page of Zahn's first-line register, which is printed in Band V, pp. 501–556. |
 | Register note | 90 | see Ergänzungen vol. II, p. 638 | Register note. |
 | Tune meter | 11,595 | 8.7.8.7.7.7 | Meter of the tune. |
 | Tune composer / attribution | 6,011 | Mel. bei (von?) König | Composer as Zahn prints it. |
@@ -506,7 +510,7 @@ From: texts.xlsx, sheet 'Text-Tune'.
 
 ### breitendich_1764_melodies.csv (194 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Breitendich 1764 melodies'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Breitendich 1764 melodies'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -538,7 +542,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Breitendich 1764 melodies
 
 ### breitendich_cross_references.csv (280 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Breitendich cross-references'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Breitendich cross-references'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -552,7 +556,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Breitendich cross-referen
 
 ### foltmar_1785_melodies.csv (93 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Foltmar 1785 melodies'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Foltmar 1785 melodies'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -577,7 +581,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Foltmar 1785 melodies'.
 
 ### foltmar_1785_register.csv (301 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Foltmar 1785 register'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Foltmar 1785 register'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -603,7 +607,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Foltmar 1785 register'.
 
 ### lindeman_1873_older_melodies.csv (77 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Lindeman 1873 older melodies'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Lindeman 1873 older melodies'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -633,7 +637,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Lindeman 1873 older melod
 
 ### belsheim_1876.csv (156 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Belsheim 1876'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Belsheim 1876'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -668,7 +672,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Belsheim 1876'.
 
 ### belsheim_1876_tunes.csv (94 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Belsheim 1876 – tunes'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Belsheim 1876 – tunes'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -698,7 +702,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Belsheim 1876 – tunes'.
 
 ### berggreen_origins.csv (143 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Berggreen origins'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Berggreen origins'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -715,7 +719,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Berggreen origins'.
 
 ### kingo_hymnal_melody_lines.csv (59 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Kingo hymnal melody lines'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Kingo hymnal melody lines'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -745,7 +749,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Kingo hymnal melody lines
 
 ### guldberg_1779_melody_lines.csv (159 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Guldberg 1779 melody lines'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Guldberg 1779 melody lines'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -775,7 +779,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Guldberg 1779 melody line
 
 ### pontoppidan_1740_check.csv (549 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Pontoppidan 1740 check'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Pontoppidan 1740 check'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -826,7 +830,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Pontoppidan 1740 check'.
 
 ### pontoppidan_1740_breitendich.csv (189 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Pontoppidan – Breitendich'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Pontoppidan – Breitendich'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -846,7 +850,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Pontoppidan – Breitendi
 
 ### neuendorf_translations.csv (70 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Neuendorf translations'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Neuendorf translations'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -872,7 +876,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Neuendorf translations'.
 
 ### hm_2004_register.csv (432 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'HM 2004 register'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'HM 2004 register'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -892,7 +896,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'HM 2004 register'.
 
 ### chorale_book_1863.csv (190 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Chorale Book 1863'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Chorale Book 1863'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -914,7 +918,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Chorale Book 1863'.
 
 ### elh_handbook.csv (646 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'ELH Handbook'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'ELH Handbook'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -936,7 +940,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'ELH Handbook'.
 
 ### elh_handbook_tunes.csv (413 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'ELH Handbook tunes'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'ELH Handbook tunes'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -946,7 +950,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'ELH Handbook tunes'.
 
 ### elhb_1911_tunes.csv (601 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'ELHB 1911 tunes'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'ELHB 1911 tunes'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -960,7 +964,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'ELHB 1911 tunes'.
 
 ### julian_article_rows.csv (2,936 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Julian article rows'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Julian article rows'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -985,7 +989,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Julian article rows'.
 
 ### hymnoglypt_left_out.csv (72 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Hymnoglypt left out'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Hymnoglypt left out'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -996,7 +1000,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Hymnoglypt left out'.
 
 ### norsk_salmebok_1985.csv (106 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Norsk salmebok 1985'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Norsk salmebok 1985'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1014,7 +1018,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Norsk salmebok 1985'.
 
 ### n13_versemaal_haavik.csv (120 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'N13 versemål (Haavik)'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'N13 versemål (Haavik)'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1026,7 +1030,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'N13 versemål (Haavik)'.
 
 ### n13_german_authors_km_2012.csv (83 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'N13 German authors (KM 2012)'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'N13 German authors (KM 2012)'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1047,7 +1051,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'N13 German authors (KM 20
 
 ### troens_rare_klenodie_1894.csv (355 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Troens rare Klenodie 1894'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Troens rare Klenodie 1894'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1069,7 +1073,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Troens rare Klenodie 1894
 
 ### julian_ocr_check_2026_11_11.csv (1,688 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Julian OCR check 2026-11-11'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Julian OCR check 2026-11-11'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1094,7 +1098,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Julian OCR check 2026-11-
 
 ### meter_check_2026_11_12.csv (332 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Meter check 2026-11-12'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Meter check 2026-11-12'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1113,7 +1117,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Meter check 2026-11-12'.
 
 ### data_issues.csv (17 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Data issues'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Data issues'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1123,7 +1127,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Data issues'.
 
 ### scandinavian_id_changes.csv (111 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian ID changes'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'Scandinavian ID changes'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1133,7 +1137,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'Scandinavian ID changes'.
 
 ### en_id_changes.csv (26 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'EN ID changes'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'EN ID changes'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1143,7 +1147,7 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'EN ID changes'.
 
 ### de_id_changes.csv (1 rows)
 
-From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'DE ID changes'.
+From: Tunes_and_Texts_DATA_2026-11-23_v95.xlsx, sheet 'DE ID changes'.
 
 | Column | Filled | Example | Meaning |
 |---|---|---|---|
@@ -1151,3 +1155,12 @@ From: Tunes_and_Texts_DATA_2026-11-20_v90.xlsx, sheet 'DE ID changes'.
 | New ID | 1 | DE-05236 | DE ID now. |
 | Why | 1 | "Wenn wir in höchsten Nöten sein" (provisional) = Zahn's "Wa | Reason for the change. |
 
+
+
+## persons.csv (core, added 2026-11-23)
+Authority list: one row per identified author, translator or composer. **Person key** stable ID; **Preferred name** "Surname, Given"; **Name (display)**; **Born / Died** years (German National Library GND where it has the person, otherwise hymnological reference works); **Role**; **GND / GND URL / VIAF** authority-file IDs; **Texts (n) / Tunes (n)** and **Text IDs / Zahn nos.** the texts and tunes credited to the person; **Printed forms** the credits as printed in the sources that were merged into this person. 377 persons, about 83 % of author/composer credits; the rest stay as printed.
+
+## text_guidance.csv (core, added 2026-11-23)
+One row per text. **Place in family tree**: original (no original linked above it) or translation; **Original (top of tree)** the text at the top. **Original's own tune(s)**: Zahn tunes of the original that Zahn prints under the original itself (they first appeared with it). **Original's borrowed tune(s)**: tunes the original was sung to that Zahn prints under another text (an original with only "also sung to" tunes counts as borrowed). **Other melodies**: tunes linked to this text that the original does not have. **Copyright status (guidance)**: public domain (printed in a book before 1931, hymnary.org "Public Domain", or every credited person died by 1930) / likely public domain, life + 70 (every credited person died 1931–1955, no printing before 1931 found) / probably in copyright (hymnary.org © notice, or a credited person died 1956 or later or is living) / not known; **Copyright basis** the reason. Guidance from dates, not legal advice.
+
+**First line before spell check (2026-11-23)** (scandinavian_texts, de_texts_added, zahn_texts): the first line before the 2026-11-23 spell/OCR check of German and Danish first lines; empty where nothing changed.

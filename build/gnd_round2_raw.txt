@@ -1,0 +1,130 @@
+klein-jj|134161149|Klein, Johann Joseph|1740|1823|57824129|90
+mueller-jt|127240896|Mueller, John Theodore|1885|1967|30552900|90
+nicolai-jg|10022301X|Nicolai, Johann Georg|1720|1788|47104608|90
+demantius|124662153|Demantius, Christoph|1567|1643|22405588|90
+frech|11933996X|Frech, Johann Georg|1790|1864|69736771|90
+geletzky|119721228|Jelecký, Jan||1568|64822993|90
+kennedy|1054609985|Kennedy, Benjamin Hall|1804|1889|31560780|90
+opitz|118590111|Opitz, Martin|1597|1639|22167909|90
+weissel|134128141|Weissel, Georg|1590|1635|11056282|90
+alberus|118501550|Alberus, Erasmus|1503|1553|7408653|90
+apel|100418449|Apel, Johann Georg Christian|1775|1841|59431661|90
+flitner|122203313|Flittner, Johann|1618|1678|3347760|90
+janus|129975605|Janus, Martin|1620|1682|38012921|90
+knak|116243694|Knak, Gustav Friedrich Ludwig|1806|1878|52437164|90
+ludaemilia|104162368|Ludaemilia Elisabeth|1640|1672|5358603|90
+molther|118583379|Molther, Philipp Heinrich|1714|1780|45094767|90
+mueller-jm|128475099|Müller, Johann Michael|1683|1743|7653784|90
+petersen-jw|119129779|Petersen, Johann Wilhelm|1649|1727|121622773|90
+rump|119811952|Rump, Daniel|1549|1600|59901920|ok
+schneegass|130089060|Schneegaß, Cyriacus|1546|1597|27355558|90
+stryker|1158537174|Stryker, Melancthon Woolsey|||75887204|90
+zwick|118773305|Zwick, Johannes|1496|1542|40174227|90
+hagius|140332324|Hagen, Peter von|1569|1620|103859702|90
+heinlein|100862403|Hainlein, Paul|1626|1686|7740577|90
+rinck|116549165|Rinck, Johann Christian Heinrich|1770|1846|17408757|90
+scheidemann|118754343|Scheidemann, Heinrich|1596|1663|34644495|90
+seiss|1227938187|Seiss, Joseph A.|1823|1904|8627302|90
+vopelius|118770322|Vopelius, Gottfried|1645|1715|35252393|90
+enckhausen|116471751|Enckhausen, Heinrich Friedrich|1799|1885|39688086|90
+gesenius|11659554X|Gesenius, Justus|1601|1673|77071681|90
+magdeburg|116660929|Magdeburg, Joachim|1525|1587|769908|90
+maukisch|122075641|Maukisch, Johann|1617|1669|35328967|90
+polack|1250344328|Polack, William Gustave|1890|1950|11876683|90
+schwemmer|129371688|Schwemmer, Heinrich|1621|1696|62626510|90
+scriver|118612433|Scriver, Christian|1629|1693|22132102|90
+steurlein|121120791|Steurlein, Johann|1546|1613|77163480|90
+thilo|117341428|Thilo, Valentin|1607|1662|10620904|90
+arndt-em|118504118|Arndt, Ernst Moritz|1769|1860|59103999|90
+christmann|116510013|Christmann, Johann Friedrich|1752|1817|77069328|90
+crasselius|135725178|Crasselius, Bartholomäus|1667|1724|301897951|90
+drese|130014737|Drese, Adam|1620|1701|54330749|90
+flor|119542269|Flor, Christian|1626|1697|69196208|90
+gryphius|118543032|Gryphius, Andreas|1616|1664|49240166|90
+herrnschmidt|10001349X|Herrnschmidt, Johann Daniel|1675|1723|54486306|90
+hopkins|13701158X|Hopkins, John H.|1820|1891|66333657|90
+kuehnau|136586953|Kühnau, Johann Christoph|1735|1805|79251404|90
+quirsfeld|123506204|Quirsfeld, Johann|1642|1686|18132959|90
+rolle|119147033|Rolle, Johann Heinrich|1716|1785|59352113|90
+schmidlin|100558380|Schmidlin, Johannes|1722|1772|37181907|90
+sieber|124893511|Sieber, Justus|1628|1695|57557836|90
+woodward|1053160747|Woodward, George Ratcliffe|1848|1934|104833765|90
+bridges|118660063|Bridges, Robert|1844|1930|73868561|90
+buttstett|122762215|Buttstett, Franz Vollrath|1735|1814|3362649|90
+charles|130835927|Charles, Elizabeth Rundle|1828|1896|95236972|90
+eber|118681524|Eber, Paul|1511|1569|42631999|90
+gambold|173053815|Gambold, John|1711|1771|67836785|90
+keymann|123210178|Keimann, Christian|1607|1662|45202875|90
+kniewel|116254408|Kniewel, Theodor Friedrich|1783|1859|74598553|90
+krummacher-fa|118724789|Krummacher, Friedrich Adolf|1767|1845|154736|90
+liebich|116996838|Liebich, Ehrenfried|1713|1780|10611688|90
+musculus|11948370X|Musculus, Wolfgang|1497|1563|51760099|90
+moewes|14006270X|Möwes, Heinrich|1793|1834|347149196513674791943|90
+rheineck|123496276|Rheineck, Christoph|1748|1797|37827138|90
+schirmer|11727609X|Schirmer, Michael|1606|1673|69703631|90
+strutius|134533593|Strutius, Thomas|1621|1678|79661781|90
+wolkenstein|117432911|Wolkenstein, David|1534|1592|5708646|90
+bonn|119072238|Bonnus, Hermann|1504|1548|8189609|90
+burmeister-j|118665324|Burmeister, Joachim|1564|1629|68922314|90
+garve|138229031|Garve, Karl Bernhard|1763|1841|88276907|90
+hoffmann-g|11922917X|Hoffmann, Gottfried|1658|1712|71649238|90
+moller|118870874|Moller, Martin|1547|1606|36977511|90
+neunherz|129960896|Neunherz, Johannes|1653|1737|67560277|90
+oesterreicher|104209070|Oesterreicher, Georg|1563|1621|71825743|90
+pape|138701601|Pape, Heinrich|1609|1663|59040373|90
+spreng|121297004|Spreng, Johann Jacob|1699|1768|10698520|90
+stoeylen|1147221014|Støylen, Bernt|1858|1937|61355553|90
+wegelin|124827721|Wegelin, Josua|1604|1640|20624823|90
+wegleiter|11721857X|Wegleiter, Christoph|1659|1706|17212706|90
+wolf-jg|130134686|Wolf, Jacob Gabriel|1684|1754|6031165|90
+barth-cg|118821210|Barth, Christian Gottlob|1799|1862|7565985|90
+bernstein|122594789|Bernstein, Christian|1628|1699|10731200|ok
+dachstein|119650967|Dachstein, Wolfgang|1487|1553|22955470|90
+feller|116459301|Feller, Joachim|1638|1691|197874021|90
+knoepken|119731789|Knopken, Andreas|1468|1539|151746467|90
+krieger-a|118724428|Krieger, Adam|1634|1666|71585930|90
+lackmann|116640545|Lackmann, Peter|1659|1713|37672453|90
+lange-jc|116702982|Lange, Johann Christian|1669|1756|8146468|90
+laufenberg|118773747|Laufenberg, Heinrich|1390|1460|61592510|90
+leon|124437893|Leon, Johann|1531|1597|267854675|90
+liscow|124250033|Liscovius, Salomon|1640|1689|60011615|90
+mentzer|122920902|Mentzer, Johann|1658|1734|41779851|90
+neale|119232030|Neale, J. M.|1818|1866|37017097|90
+novalis|118588893|Novalis|1772|1801|95155102|90
+rosenmueller|118749811|Rosenmüller, Johann|1617|1684|10034506|90
+rostgaard|133279391|Rostgaard, Frederik|1671|1745|56771726|90
+rothe|100260950|Rothe, Johann Andreas|1688|1758|74194056|90
+saubert|119486911|Saubert, Johannes|1592|1646|61556293|90
+schelle|115399798|Schelle, Johann|1648|1701|5125029|90
+stallybrass|1201751659|Stallybrass, James Steven|1826|1888|67586010|90
+stark-l|120708876|Starck, Ludwig|1628|1681|850852|90
+ulich|104072601|Ulich, Johann|1634|1712|15199129|90
+wuelffer|117429740|Wülfer, Daniel|1617|1685|5708554|90
+bacon|133769275|Bacon, Leonard Woolsey|1830|1907|55346137|90
+balduin|116043024|Balduin, Gottlieb|1640|1684|15509983|ok
+boesset|120890038|Boësset, Antoine|1585|1643|5116990|90
+buchholz|118516744|Bucholtz, Andreas Heinrich|1607|1671|67256564|90
+decius|119486725|Decius, Nikolaus|1485|1546|30347909|90
+derschau|123042097|Derschow, Bernhard|1591|1639|37815664|90
+douglas|1055380752|Douglas, Charles Winfred|1867|1944|12602272|90
+fueger|129038938|Füger, Caspar|1521|1592|30605577|90
+hecker|136209122|Hecker, Heinrich Cornelius|1699|1743|80593564|90
+held|128486740|Held, Heinrich|1620|1659|57666156|90
+hey|118704400|Hey, Wilhelm|1789|1854|74647669|90
+heyden|11678735X|Heyden, Sebald|1499|1561|5104830|90
+hille-e|116811579|Hille, Eduard|1822|1891|15529527|90
+hommel|116975970|Hommel, Friderich|1813|1892|217816199|90
+isaac|11855588X|Isaac, Heinrich|1450|1517|34643473|90
+longfellow|118780409|Longfellow, Henry Wadsworth|1807|1882|54150826|90
+loescher|118728830|Löscher, Valentin Ernst|1673|1749|68919557|90
+matthesius|118731696|Mathesius, Johannes|1504|1565|12290982|90
+naegeli|11858622X|Nägeli, Hans Georg|1773|1836|54196135|90
+pfeil|116164174|Pfeil, Christoph Carl Ludwig von|1712|1784|756821|90
+ritter-ag|116570881|Ritter, August Gottfried|1811|1885|54903516|90
+sattler|116975083|Sattler, Heinrich|1811|1891|13072663|90
+schlegel-ja|118607995|Schlegel, Johann Adolf|1721|1793|5723688|90
+schroeter|118761978|Schröter, Leonhart|1532|1601|116747186|90
+stegmann|118753010|Stegmann, Josua|1588|1632|9884583|90
+winckler|104379480|Winckler, Johann Joseph|1670|1722|61987779|90
+zeller-ch|118772473|Zeller, Christian Heinrich|1779|1860|193656561|90
+pustkuchen|126740828|Pustkuchen|||77316323|ok

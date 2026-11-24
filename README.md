@@ -1,13 +1,15 @@
 # Tunes and Texts: Lutheran Hymns in German, Scandinavian and English
 
-**Release 0.9 — provisional, under review (2026-11-20), built from the working database DATA v90, Zahn master v16 and Zahn texts and links v9, after two quality-control passes: QC #2 (2026-11-14 → 2026-11-19: seeded random samples in 16 batches by how the data were made; a batch passes at ≤1 serious error in 60+ rows, and every error found was fixed and swept for wherever else it occurred) and a final QC #3 (2026-11-20: an automated check of every row, a full read of the latest changes, and a 500-row random sample — 1 serious error, so the serious-error rate is at most about 1 % at 95 % confidence; the error and the 25 mislabelled rows found by the sweep were fixed), followed by a full read of the last additions (DATA v89: Finnish melodies re-read from the hymnal's printed music, Czech links checked against the Evangelický zpěvník 2021; 2 serious errors found and fixed in DATA v90).** This is a review version: links marked *probable* or *check* may still change. The sources it draws on are being invited to look it over and send corrections or objections. Release 1.0, with a DOI, will follow the review.
+**Release 0.9 — provisional, under review (2026-11-23), built from the working database DATA v95, Zahn master v16 and Zahn texts and links v12, after two quality-control passes: QC #2 (2026-11-14 → 2026-11-19: seeded random samples in 16 batches by how the data were made; a batch passes at ≤1 serious error in 60+ rows, and every error found was fixed and swept for wherever else it occurred) and a final QC #3 (2026-11-20: an automated check of every row, a full read of the latest changes, and a 500-row random sample — 1 serious error, so the serious-error rate is at most about 1 % at 95 % confidence; the error and the 25 mislabelled rows found by the sweep were fixed), followed by a full read of the last additions (DATA v89: Finnish melodies re-read from the hymnal's printed music, Czech links checked against the Evangelický zpěvník 2021; 2 serious errors found and fixed in DATA v90).** This is a review version: links marked *probable* or *check* may still change. The sources it draws on are being invited to look it over and send corrections or objections. Release 1.0, with a DOI, will follow the review.
 
 Compiled by John Hutchins.
+
+**New in this build (2026-11-23):** `data/core/persons.csv` (authority list of 377 authors, translators and composers with dates and GND/VIAF IDs) and `data/core/text_guidance.csv` (place in the family tree, own/borrowed tunes, copyright guidance per text); German and Danish first lines spell/OCR-checked.
 
 ## What this is
 A linked index of Lutheran hymn **tunes** and **texts**:
 - **9,538 tunes** — every melody in Johannes Zahn, *Die Melodien der deutschen evangelischen Kirchenlieder* (6 vols., 1889–1893), with its Zahn number, source, meter and opening notes, and a link to the scan of the tune.
-- **German texts** — 5,897 from Zahn's text register (DE-00001…DE-05897) and 2,076 added by this project (DE-05898…DE-07977; 33 of them are marked DUPLICATE of a Zahn text and kept only for the record), each with the tunes it is sung to (11,789 text–tune links from Zahn).
+- **German texts** — 5,897 from Zahn's text register (DE-00001…DE-05897) and 2,066 added by this project (DE-05898…DE-07977; 33 of them are marked DUPLICATE of a Zahn text and kept only for the record), each with the tunes it is sung to (11,789 text–tune links from Zahn).
 - **7,389 English texts** (first lines), 6,228 linked to the German (or Latin) text they translate, and to Zahn tunes (3,914 English–tune links).
 - **1,106 Danish, Norwegian and Swedish texts**, linked to their German originals and to Zahn tunes (1,003 links), including the whole of Pontoppidan's *Den nye Psalme-Bog* (1740) checked against Breitendich's melody book (1764).
 - **475 Finnish, Czech, Slovak, Polish and Spanish texts**: Finnish translations from the Finnish hymnal of 1986 (FI-, 169), biblical-Czech translations of the Tranoscius tradition from the Cithara Sanctorum (CS-, 236) and their modern Slovak forms from the Evanjelický spevník (SK-, 58), and a few Polish (PL-, 10) and Spanish (ES-, 2) translations found among hymnary.org's records of German hymns, with 361 links to Zahn tunes — 63 of them the melody Finland sang, chosen with Zahn's citations of the Finnish chorale book (Helsingfors 1888) and the hymnal's melody notes.
@@ -50,7 +52,7 @@ All files are UTF-8 CSV. A column ending in **URL** holds the link that the spre
 | `data/core/scandinavian_texts.csv` | 1,106 | Scandinavian texts |
 | `data/core/scandinavian_tune_links.csv` | 1,003 | Scandinavian–Tune links |
 | `data/core/scandinavian_english_links.csv` | 38 | Scandinavian–English links |
-| `data/core/de_texts_added.csv` | 2,076 | New DE texts |
+| `data/core/de_texts_added.csv` | 2,066 | New DE texts |
 | `data/core/becker_psalter_schuetz.csv` | 159 | Becker Psalter (Schütz) |
 | `data/core/translators.csv` | 29 | Translators |
 | `data/core/hymnal_appearances.csv` | 7,906 | Hymnal appearances |
@@ -122,7 +124,7 @@ Zahn I–VI (1889–1893); Julian, *A Dictionary of Hymnology* (1892; 2nd ed. 19
 Rows whose 'First-line QC (2026-11-13)' starts with NOT … are kept for the record but are not hymn first lines; leave them out of first-line searches. In `zahn_tunes.csv`, 'Zahn no.' is Zahn's number (the ID) and 'Sort key' is only for ordering. In `zahn_text_tune_links.csv` the corrected composer and year come from Zahn master v16 (after the QC re-reading of the composer fills). German texts marked DUPLICATE in `de_texts_added.csv` name the Zahn text that replaces them; no link uses them. For the Czech texts the German original is usually the compiler's identification from the Czech first line and the author credit (marked probable), because the Czech and Slovak hymnals do not name the originals.
 
 ## How to cite
-Hutchins, John (comp.). *Tunes and Texts: Lutheran Hymns in German, Scandinavian and English*, release 0.9 (provisional, 2026-11-20). Please cite the release number; a DOI will be given with release 1.0.
+Hutchins, John (comp.). *Tunes and Texts: Lutheran Hymns in German, Scandinavian and English*, release 0.9 (provisional, 2026-11-23). Please cite the release number; a DOI will be given with release 1.0.
 
 ## Corrections
-Corrections and objections are welcome, especially from the sources listed in `SOURCES.md`: use **Suggest a correction** on any page of the site, open an issue on this repository, or write to intuitufidei@gmail.com.
+Corrections and objections are welcome, especially from the sources listed in `SOURCES.md`: use **Suggest a correction** on any page of the site, open an issue on this repository, or write to jhutchns@gmail.com.

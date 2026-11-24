@@ -56,7 +56,7 @@ readme = readme.replace("- `data/core/` — the database proper.",
                         "- `data/core/` — the database proper.\n- `downloads/` — every table in one Excel workbook.\n"
                         "- `index.html`, `assets/`, `site-data/` — the website; `build/` — the scripts that build it.")
 readme = readme.replace('open an issue on the repository.',
-                        'use **Suggest a correction** on any page of the site, open an issue on this repository, or write to intuitufidei@gmail.com.')
+                        'use **Suggest a correction** on any page of the site, open an issue on this repository, or write to jhutchns@gmail.com.')
 open(os.path.join(REPO, 'README.md'), 'w', encoding='utf-8').write(readme)
 
 # 3. sources page for the site
